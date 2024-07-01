@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../features/gallery/presentation/view/gallery_screen.dart';
+
 class Routes {
   static const String intro = '/intro';
   static const String gallery = '/gallery';
@@ -10,7 +12,7 @@ class Routes {
       case intro:
         return MaterialPageRoute(builder: (_) => Container());
       case gallery:
-        return MaterialPageRoute(builder: (_) => Container());
+        return MaterialPageRoute(builder: (_) => GalleryScreen());
       case apod:
         final id = settings.arguments as String;
         // return MaterialPageRoute(builder: (_) => PlantDetailPage(galleryId: id));

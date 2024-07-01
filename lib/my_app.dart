@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: Routes.intro,
+      initialRoute: Routes.gallery,
       onGenerateRoute: Routes.generateRoute,
     );
   }
