@@ -6,6 +6,8 @@ class ApodModel extends ApodEntity {
     required super.title,
     required super.url,
     required super.explanation,
+    required super.media_type,
+    required super.thumbnail_url,
   });
 
   factory ApodModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,8 @@ class ApodModel extends ApodEntity {
       title: json['title'] ?? '',
       url: json['url'] ?? '',
       explanation: json['explanation'] ?? '',
+      media_type: json['media_type'] ?? '',
+      thumbnail_url: json['thumbnail_url'] ?? '',
     );
   }
 }

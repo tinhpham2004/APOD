@@ -1,4 +1,5 @@
 import 'package:apod/features/gallery/di/dependecy_injection.dart';
+import 'package:apod/features/gallery/presentation/view/apod_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -9,10 +10,6 @@ import '../network/server_api_client.dart';
 final getIt = GetIt.instance;
 
 void setup() {
-  // Blocs
-  getIt.registerFactory(() => GalleryScreen());
-  getIt.registerFactory(() => Container());
-
   // Network Handler
   getIt.registerLazySingleton<NetworkInfoRepository>(
     () => NetworkInfoRepositoryImpl(),

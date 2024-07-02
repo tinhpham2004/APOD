@@ -1,3 +1,5 @@
+import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
+import 'package:apod/features/gallery/presentation/view/apod_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/gallery/presentation/view/gallery_screen.dart';
@@ -14,9 +16,13 @@ class Routes {
       case gallery:
         return MaterialPageRoute(builder: (_) => GalleryScreen());
       case apod:
-        final id = settings.arguments as String;
         // return MaterialPageRoute(builder: (_) => PlantDetailPage(galleryId: id));
-        return MaterialPageRoute(builder: (_) => Container());
+        final ApodEntity apod = settings.arguments as ApodEntity;
+        return MaterialPageRoute(
+            settings: RouteSettings(arguments: apod),
+            builder: (_) {
+              return ApodScreen();
+            });
       default:
         return MaterialPageRoute(builder: (_) => Container());
     }
