@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:apod/config/app_config.dart';
 
 import '../../../../core/network/server_api_client.dart';
@@ -12,18 +14,23 @@ class ApodClientImpl implements ApodClient {
   });
 
   @override
-  Future<List<ApodModel>> getGallery({required int page}) async {
-    final startDate = DateTime.now()
-        .subtract(Duration(days: page * AppConfig.LIMIT_PAGE_LOAD));
-    final endDate = DateTime.now();
-
-    final response = await apiClient.get(Uri.parse(
-        '${AppConfig.BASE_URL}&start_date=${startDate.toIso8601String().split('T').first}&end_date=${endDate.toIso8601String().split('T').first}'));
-    return (response.body as List).map((data) => ApodModel(
-        date: data['date'],
-        title: data['title'],
-        url: data['url'],
-        explanation: data['explanation'],
-      )).toList();
+  Future<List<ApodModel>> getGallery() async {
+    try {
+      final startDate = DateTime.now().subtract(Duration(days: 1));
+      final endDate = DateTime.now();
+      final Map<String, String> _queryParameters = <String, String>{
+        'api_key': 'Z3jwfvKezfiV5axB9Cd84wWWeNj8ZJnOKmxN1GbC',
+        'start_date': '${startDate.toIso8601String().split('T').first}',
+        'end_date': '${endDate.toIso8601String().split('T').first}',
+      };
+      final response = await apiClient.get('/${AppConfig.BASE_URL}',
+          queryParameters: _queryParameters);
+      return (jsonDecode(response.body) as List)
+          .map((data) => ApodModel.fromJson(data))
+          .toList();
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 }

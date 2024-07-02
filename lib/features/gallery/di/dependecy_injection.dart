@@ -8,18 +8,13 @@ import '../data/datasources/apod_datasource_impl.dart';
 import '../presentation/viewmodel/apod_bloc.dart';
 
 Future<void> initGallery() async {
-  getIt.registerLazySingleton(() => ApodViewModel(
-        getGalleryUseCase: getIt(),
-      ));
+  getIt.registerLazySingleton(() => ApodViewModel(getGalleryUseCase: getIt()));
 
-  getIt.registerLazySingleton(
-      () => GetGalleryUseCase(page: getIt(), repository: getIt()));
+  getIt.registerLazySingleton(() => GetGalleryUseCase(repository: getIt()));
 
-  getIt.registerLazySingleton<ApodClient>(() => ApodClientImpl(
-        apiClient: getIt(),
-      ));
+  getIt.registerLazySingleton<ApodClient>(
+      () => ApodClientImpl(apiClient: getIt()));
 
-  getIt.registerLazySingleton<ApodInterface>(() => ApodInterfaceImpl(
-        apodClient: getIt(),
-      ));
+  getIt.registerLazySingleton<ApodInterface>(
+      () => ApodInterfaceImpl(apodClient: getIt()));
 }

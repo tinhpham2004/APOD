@@ -9,9 +9,8 @@ abstract class ApodEvent extends Equatable {
 
 // Get Random Event Action /// -----------------------------------/// -----------------------------------/// -----------------------------------
 class GetGalleryEvent extends ApodEvent {
-  final int page;
-  const GetGalleryEvent({required this.page});
+  const GetGalleryEvent();
   @override
-  List<Object> get props => [page];
+  List<Object> get props => [];
 }
 /// -----------------------------------/// -----------------------------------/// -----------------------------------/// -----------------------------------

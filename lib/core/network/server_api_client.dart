@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // Check scheme server
 const String serverScheme = 'https';
 // Server URL Dev
-const String serverAuthority = 'api.chucknorris.io';
+const String serverAuthority = 'api.nasa.gov';
 
 class ServerApiClient {
   final NetworkInfoRepository networkInfoRepository;
@@ -53,9 +53,9 @@ class ServerApiClient {
       rethrow;
     }
 
-    if (kDebugMode) {
-      log(_formatResponseLog(response));
-    }
+    // if (kDebugMode) {
+    //   log(_formatResponseLog(response));
+    // }
 
     return _processResponse(
       response: response,

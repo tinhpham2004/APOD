@@ -1,4 +1,5 @@
 import 'package:apod/core/routes/routes.dart';
+import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
 import 'package:apod/features/gallery/domain/usecases/get_gallery.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/injection.dart';
 import '../viewmodel/apod_bloc.dart';
 
-class GalleryScreen extends StatelessWidget {
+class GalleryScreen extends StatefulWidget {
+  @override
+  State<GalleryScreen> createState() => _GalleryScreenState();
+}
+
+class _GalleryScreenState extends State<GalleryScreen> {
+  List<ApodEntity> apodEntity = [];
+
+  final apodBloc = getIt<ApodViewModel>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +27,6 @@ class GalleryScreen extends StatelessWidget {
             icon: Icon(Icons.favorite),
             onPressed: () {
               // Navigate to the favorite page
-              Navigator.pushNamed(context, '/favorite');
             },
           ),
           IconButton(
@@ -28,46 +37,50 @@ class GalleryScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: BlocProvider(
-        create: (_) => getIt<ApodViewModel>()..add(GetGalleryEvent(page: 1)),
-        child: ApodList(),
-      ),
-    );
-  }
-}
-
-class ApodList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ApodViewModel, ApodState>(
-      builder: (context, state) {
-        if (state is LoadingGetApodState) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state is SuccessGetApodState) {
-          return ListView.builder(
-            itemCount: state.apodEntities.length,
-            itemBuilder: (context, index) {
-              final apod = state.apodEntities[index];
-              return ListTile(
-                leading: Image.network(apod.url ?? ''),
-                title: Text(apod.title),
-                subtitle: Text(apod.date),
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.apod,
-                    arguments: apod,
+      body: BlocProvider<ApodViewModel>(
+        create: (context) {
+          apodBloc.add(GetGalleryEvent());
+          return apodBloc;
+        },
+        child: BlocConsumer<ApodViewModel, ApodState>(
+          listener: (context, state) {
+            if (state is SuccessGetApodState) {
+              setState(() {
+                apodEntity = state.apodEntities;
+              });
+            }
+            if (state is FailedGetApodState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Erorr')),
+              );
+            }
+          },
+          builder: (context, state) {
+            if (state is LoadingGetApodState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is GetGalleryState) {
+              return ListView.builder(
+                reverse: true,
+                shrinkWrap: true,
+                itemCount: state.apodEntities.length,
+                itemBuilder: (context, index) {
+                  final apod = state.apodEntities[index];
+                  return ListTile(
+                    leading: apod.url != null ? Image.network(apod.url!) : null,
+                    title: Text(apod.title),
+                    subtitle: Text(apod.date),
+                    onTap: () {},
                   );
                 },
               );
-            },
-          );
-        } else if (state is FailedGetApodState) {
-          return Center(child: Text(state.toString()));
-        } else {
-          return Center(child: Text('No data available'));
-        }
-      },
+            } else if (state is FailedGetApodState) {
+              return Center(child: Text('Error'));
+            } else {
+              return Center(child: Text('No data'));
+            }
+          },
+        ),
+      ),
     );
   }
 }

@@ -31,10 +31,10 @@ class FailedGetApodState extends ApodState {
   List<Object?> get props => [];
 }
 
-class GetGallerState extends ApodState {
+class GetGalleryState extends ApodState {
   final List<ApodEntity> apodEntities;
 
-  const GetGallerState({
+  const GetGalleryState({
     required this.apodEntities,
   });
 

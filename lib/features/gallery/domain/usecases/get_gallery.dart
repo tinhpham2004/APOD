@@ -6,8 +6,7 @@ import '../entities/apod_entity.dart';
 import '../interfaces/apod_interface.dart';
 
 class ParamsUseCaseGetGallery {
-  final int page;
-  const ParamsUseCaseGetGallery({required this.page});
+  const ParamsUseCaseGetGallery();
 }
 
 class GetGalleryResult {
@@ -21,14 +20,12 @@ class GetGalleryUseCase
     extends UseCase<GetGalleryResult, ParamsUseCaseGetGallery> {
   final ApodInterface repository;
 
-  GetGalleryUseCase({
-    required this.repository, required int page,
-  });
+  GetGalleryUseCase({required this.repository});
 
   @override
   Future<Either<Failure, GetGalleryResult>> call(
       ParamsUseCaseGetGallery params) async {
-    final checkResult = await repository.getGallery(page: params.page);
+    final checkResult = await repository.getGallery();
 
     return checkResult.fold(
       (failure) => Left(failure),

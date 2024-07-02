@@ -12,10 +12,9 @@ class ApodInterfaceImpl implements ApodInterface {
   });
 
   @override
-  Future<Either<Failure, List<ApodEntity>>> getGallery(
-      {required int page}) async {
+  Future<Either<Failure, List<ApodEntity>>> getGallery() async {
     try {
-      final response = await apodClient.getGallery(page: page);
+      final response = await apodClient.getGallery();
       return Right(response);
     } on Object {
       return Left(ServerFailure());

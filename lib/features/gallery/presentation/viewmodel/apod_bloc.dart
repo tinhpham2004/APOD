@@ -19,20 +19,18 @@ class ApodViewModel extends Bloc<ApodEvent, ApodState> {
   }
 
   /// This method getApod balance from the stream
-  Future<GetGallerState> _getGallery({
+  Future<GetGalleryState> _getGallery({
     required GetGalleryEvent event,
     required Emitter<ApodState> emit,
   }) async {
     emit(LoadingGetApodState());
-    final result = await getGalleryUseCase(
-      ParamsUseCaseGetGallery(page: event.page),
-    );
+    final result = await getGalleryUseCase(ParamsUseCaseGetGallery());
 
     return result.fold(
       (l) {
         emit(FailedGetApodState());
         emit(InitGetApodState());
-        return GetGallerState(
+        return GetGalleryState(
           apodEntities: [],
         );
       },
@@ -40,7 +38,7 @@ class ApodViewModel extends Bloc<ApodEvent, ApodState> {
         emit(
           SuccessGetApodState(apodEntities: resp.response),
         );
-        return GetGallerState(apodEntities: resp.response);
+        return GetGalleryState(apodEntities: resp.response);
       },
     );
   }
