@@ -59,7 +59,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
             Container(
               margin: EdgeInsets.only(right: 12.0),
               child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed('/calendar');
+                },
                 child: Icon(
                   Icons.calendar_today_outlined,
                   color: AppColors.white,
@@ -112,7 +114,9 @@ class _GalleryScreenState extends State<GalleryScreen> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
                                 child: Image.network(
-                                  apod.media_type == MediaType.IMAGE ? apod.url : apod.thumbnail_url,
+                                  apod.media_type == MediaType.IMAGE
+                                      ? apod.url
+                                      : apod.thumbnail_url,
                                   height: 120,
                                   width: double.infinity,
                                   fit: BoxFit.cover,

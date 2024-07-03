@@ -49,4 +49,22 @@ class GetGalleryState extends ApodState {
   }
 }
 
+class GetCalendarState extends ApodState {
+  final ApodEntity apodEntity;
+
+  const GetCalendarState({
+    required this.apodEntity,
+  });
+
+  @override
+  List<Object?> get props => [apodEntity];
+
+  @override
+  String toString() {
+    return '''
+      ApodState State: ${apodEntity.toString()}
+      ''';
+  }
+}
+
 /// -----------------------------------/// -----------------------------------/// -----------------------------------/// -----------------------------------

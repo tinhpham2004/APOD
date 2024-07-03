@@ -53,9 +53,9 @@ class ServerApiClient {
       rethrow;
     }
 
-    // if (kDebugMode) {
-    //   log(_formatResponseLog(response));
-    // }
+    if (kDebugMode) {
+      log(_formatResponseLog(response));
+    }
 
     return _processResponse(
       response: response,

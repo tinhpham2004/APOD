@@ -4,4 +4,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class ApodInterface {
   Future<Either<Failure, List<ApodEntity>>> getGallery();
+  Future<Either<Failure, ApodEntity>> getCalendar({required DateTime date});
 }

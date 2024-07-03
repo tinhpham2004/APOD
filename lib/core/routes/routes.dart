@@ -1,5 +1,6 @@
 import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
 import 'package:apod/features/gallery/presentation/view/apod_screen.dart';
+import 'package:apod/features/gallery/presentation/view/calendar_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/gallery/presentation/view/gallery_screen.dart';
@@ -8,6 +9,7 @@ class Routes {
   static const String intro = '/intro';
   static const String gallery = '/gallery';
   static const String apod = '/apod';
+  static const String calendar = '/calendar';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -23,6 +25,8 @@ class Routes {
             builder: (_) {
               return ApodScreen();
             });
+      case calendar:
+        return MaterialPageRoute(builder: (_) => CalendarScreen());
       default:
         return MaterialPageRoute(builder: (_) => Container());
     }
