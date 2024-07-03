@@ -3,6 +3,7 @@ import 'package:apod/core/enums/media_type.dart';
 import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
 import 'package:apod/features/gallery/presentation/widgets/youtube_player_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ApodScreen extends StatelessWidget {
   @override
@@ -112,7 +113,8 @@ class ApodScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                        },
                         child: Icon(
                           Icons.star_outline_outlined,
                           color: AppColors.white,

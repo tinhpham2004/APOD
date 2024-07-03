@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:apod/config/app_config.dart';
 
-import '../../../../core/network/server_api_client.dart';
-import '../models/apod_model.dart';
+import '../../../../../core/network/server_api_client.dart';
+import '../../models/apod_model.dart';
 import 'apod_datasource.dart';
 
 class ApodClientImpl implements ApodClient {

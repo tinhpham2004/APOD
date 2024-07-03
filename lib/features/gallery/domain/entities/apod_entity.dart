@@ -28,6 +28,28 @@ class ApodEntity extends Equatable {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      'date': date,
+      'title': title,
+      'url': url,
+      'explanation': explanation,
+      'media_type': media_type,
+      'thumbnail_url': thumbnail_url,
+    };
+  }
+
+  factory ApodEntity.fromJson(Map<String, dynamic> json) {
+    return ApodEntity(
+      date: json['date'] as String,
+      title: json['title'] as String,
+      url: json['url'] as String,
+      explanation: json['explanation'] as String,
+      media_type: json['media_type'] as String,
+      thumbnail_url: json['thumbnail_url'] as String,
+    );
+  }
+
   @override
   List<Object?> get props => [
         date,

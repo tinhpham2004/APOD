@@ -1,4 +1,4 @@
-import 'package:apod/features/calendar/domain/interfaces/calendar_interfaces.dart';
+import 'package:apod/features/calendar/domain/interfaces/calendar_interface.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/network/failure.dart';

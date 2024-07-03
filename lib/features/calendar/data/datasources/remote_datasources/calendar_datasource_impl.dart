@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:apod/features/calendar/data/datasources/calendar_datasource.dart';
+import 'package:apod/features/calendar/data/datasources/remote_datasources/calendar_datasource.dart';
 
-import '../../../../core/network/server_api_client.dart';
-import '../../../gallery/data/models/apod_model.dart';
+import '../../../../../core/network/server_api_client.dart';
+import '../../../../gallery/data/models/apod_model.dart';
 
 class CalendarClientImpl implements CalendarClient {
   final ServerApiClient apiClient;

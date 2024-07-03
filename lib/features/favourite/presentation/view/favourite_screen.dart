@@ -1,21 +1,23 @@
-import 'package:apod/core/colors/colors.dart';
-import 'package:apod/core/enums/media_type.dart';
-import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/colors/colors.dart';
 import '../../../../core/di/injection.dart';
-import '../viewmodel/apod_bloc.dart';
+import '../../../../core/enums/media_type.dart';
+import '../../../gallery/domain/entities/apod_entity.dart';
+import '../viewModel/favourite_bloc.dart';
 
-class GalleryScreen extends StatefulWidget {
+class FavouriteScreen extends StatefulWidget {
+  const FavouriteScreen({super.key});
+
   @override
-  State<GalleryScreen> createState() => _GalleryScreenState();
+  State<FavouriteScreen> createState() => _FavouriteScreenState();
 }
 
-class _GalleryScreenState extends State<GalleryScreen> {
+class _FavouriteScreenState extends State<FavouriteScreen> {
   List<ApodEntity> apodEntity = [];
 
-  final apodBloc = getIt<ApodViewModel>();
+  final favouriteBloc = getIt<FavouriteViewModel>();
 
   String _formatDate(String date) {
     List<String> parts = date.split("-");
@@ -39,58 +41,60 @@ class _GalleryScreenState extends State<GalleryScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          leadingWidth: 70.0,
+          leading: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.selected,
+                    size: 18,
+                  ),
+                  Text(
+                    'Back',
+                    style: TextStyle(
+                      color: AppColors.selected,
+                      fontSize: 16,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           title: Text(
-            'Gallery',
+            'Favourite',
             style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.w300,
               fontSize: 18,
             ),
           ),
-          leading: GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed('/favourite'),
-            child: Icon(
-              Icons.star_outline_outlined,
-              color: AppColors.white,
-              size: 25,
-            ),
-          ),
-          actions: [
-            Container(
-              margin: EdgeInsets.only(right: 12.0),
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).pushNamed('/calendar'),
-                child: Icon(
-                  Icons.calendar_today_outlined,
-                  color: AppColors.white,
-                  size: 25,
-                ),
-              ),
-            ),
-          ],
         ),
-        body: BlocProvider<ApodViewModel>(
+        body: BlocProvider(
           create: (context) {
-            apodBloc.add(GetGalleryEvent());
-            return apodBloc;
+            favouriteBloc.add(GetFavouriteEvent());
+            return favouriteBloc;
           },
-          child: BlocConsumer<ApodViewModel, ApodState>(
+          child: BlocConsumer<FavouriteViewModel, FavouriteState>(
             listener: (context, state) {
-              if (state is SuccessGetApodState) {
+              if (state is SuccessGetFavouriteState) {
                 setState(() {
                   apodEntity = state.apodEntities;
                 });
               }
-              if (state is FailedGetApodState) {
+              if (state is FailedGetFavouriteState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Erorr')),
                 );
               }
             },
             builder: (context, state) {
-              if (state is LoadingGetApodState) {
+              if (state is LoadingGetFavouriteState) {
                 return Center(child: CircularProgressIndicator());
-              } else if (state is GetGalleryState) {
+              } else if (state is GetFavouriteState) {
                 return Padding(
                   padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 25.0),
                   child: ListView.builder(
@@ -141,7 +145,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                     },
                   ),
                 );
-              } else if (state is FailedGetApodState) {
+              } else if (state is FailedGetFavouriteState) {
                 return Center(child: Text('Error'));
               } else {
                 return Center(child: Text('No data'));

@@ -6,4 +6,5 @@ class AppColors {
   static const selected = Color(0xFF4A93FF);
   static const text = Color(0xFF7F7F7F);
   static const transparent = Colors.transparent;
+  static const yellow = Color.fromARGB(255, 226, 211, 74);
 }
