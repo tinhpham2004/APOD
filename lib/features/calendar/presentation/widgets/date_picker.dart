@@ -1,16 +1,16 @@
 import 'package:apod/core/colors/colors.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../core/di/injection.dart';
 import '../viewModel/calendar_bloc.dart';
 
 class DatePicker extends StatefulWidget {
+  final CalendarViewModel calendarBloc;
+  DatePicker({required this.calendarBloc});
+
   @override
   _DatePickerState createState() => _DatePickerState();
 }
 
 class _DatePickerState extends State<DatePicker> {
-  final calendarBloc = getIt<CalendarViewModel>();
   DateTime selectedDate = DateTime.now();
   late FixedExtentScrollController _dayController;
   late FixedExtentScrollController _monthController;
@@ -90,13 +90,13 @@ class _DatePickerState extends State<DatePicker> {
     return GestureDetector(
       onTap: () {
         try {
-          calendarBloc.add(GetCalendarEvent(date: selectedDate));
+          widget.calendarBloc.add(GetCalendarEvent(date: selectedDate));
         } catch (e) {
           print(e.toString());
         }
       },
       child: Container(
-        height: 200,
+        height: 400,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -104,7 +104,7 @@ class _DatePickerState extends State<DatePicker> {
               child: ListWheelScrollView.useDelegate(
                 controller: _monthController,
                 itemExtent: 50,
-                diameterRatio: 1.5,
+                diameterRatio: 1.25,
                 physics: FixedExtentScrollPhysics(),
                 onSelectedItemChanged: _onMonthChanged,
                 childDelegate: ListWheelChildBuilderDelegate(
@@ -130,7 +130,7 @@ class _DatePickerState extends State<DatePicker> {
               child: ListWheelScrollView.useDelegate(
                 controller: _dayController,
                 itemExtent: 50,
-                diameterRatio: 1.5,
+                diameterRatio: 1.25,
                 physics: FixedExtentScrollPhysics(),
                 onSelectedItemChanged: _onDayChanged,
                 childDelegate: ListWheelChildBuilderDelegate(
@@ -156,7 +156,7 @@ class _DatePickerState extends State<DatePicker> {
               child: ListWheelScrollView.useDelegate(
                 controller: _yearController,
                 itemExtent: 50,
-                diameterRatio: 1.5,
+                diameterRatio: 1.25,
                 physics: FixedExtentScrollPhysics(),
                 onSelectedItemChanged: _onYearChanged,
                 childDelegate: ListWheelChildBuilderDelegate(

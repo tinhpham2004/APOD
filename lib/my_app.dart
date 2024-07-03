@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto-Regular',
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.transparent,
+          surfaceTintColor: AppColors.transparent,
           elevation: 0,
         ),
         scaffoldBackgroundColor: AppColors.black,

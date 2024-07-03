@@ -40,98 +40,100 @@ class ApodScreen extends StatelessWidget {
       return formattedDate;
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        leadingWidth: 70.0,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.selected,
-                  size: 18,
-                ),
-                Text(
-                  'Back',
-                  style: TextStyle(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          leadingWidth: 70.0,
+          leading: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios,
                     color: AppColors.selected,
-                    fontSize: 16,
+                    size: 18,
                   ),
-                )
-              ],
+                  Text(
+                    'Back',
+                    style: TextStyle(
+                      color: AppColors.selected,
+                      fontSize: 16,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          title: Text(
+            _formatDate(apod.date),
+            style: TextStyle(
+              color: AppColors.white,
+              fontWeight: FontWeight.w300,
+              fontSize: 18,
             ),
           ),
         ),
-        title: Text(
-          _formatDate(apod.date),
-          style: TextStyle(
-            color: AppColors.white,
-            fontWeight: FontWeight.w300,
-            fontSize: 18,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(10.0),
-                child: apod.media_type == MediaType.IMAGE
-                    ? Image.network(
-                        apod.url,
-                        height: 240,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      )
-                    : YoutubePlayerWidget(
-                        url: apod.url,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: apod.media_type == MediaType.IMAGE
+                      ? Image.network(
+                          apod.url,
+                          height: 240,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : YoutubePlayerWidget(
+                          url: apod.url,
+                        ),
+                ),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      width: 250,
+                      child: Text(
+                        apod.title,
+                        style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400),
                       ),
-              ),
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8.0),
-                    width: 250,
-                    child: Text(
-                      apod.title,
-                      style: TextStyle(
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Icon(
+                          Icons.star_outline_outlined,
                           color: AppColors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w400),
-                    ),
-                  ),
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Icon(
-                        Icons.star_outline_outlined,
-                        color: AppColors.white,
-                        size: 25,
+                          size: 25,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  apod.explanation,
-                  style: TextStyle(
-                    color: AppColors.text,
-                    fontSize: 15,
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    apod.explanation,
+                    style: TextStyle(
+                      color: AppColors.text,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

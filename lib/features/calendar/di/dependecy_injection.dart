@@ -7,8 +7,7 @@ import '../domain/usecases/get_calendar.dart';
 import '../presentation/viewModel/calendar_bloc.dart';
 
 Future<void> initCalendar() async {
-  getIt.registerLazySingleton(() => CalendarViewModel(getIt()));
-
+  getIt.registerFactory(() => CalendarViewModel(getIt()));
   getIt.registerLazySingleton(() => GetCalendarUseCase(repository: getIt()));
 
   getIt.registerLazySingleton<CalendarClient>(
