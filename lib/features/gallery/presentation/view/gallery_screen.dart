@@ -34,6 +34,12 @@ class _GalleryScreenState extends State<GalleryScreen> {
   }
 
   @override
+  void initState() {
+    
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

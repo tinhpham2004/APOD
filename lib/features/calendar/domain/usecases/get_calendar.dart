@@ -1,9 +1,9 @@
+import 'package:apod/features/calendar/domain/interfaces/calendar_interfaces.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../entities/apod_entity.dart';
-import '../interfaces/apod_interface.dart';
+import '../../../gallery/domain/entities/apod_entity.dart';
 
 class ParamsUseCaseGetCalendar {
   final DateTime date;
@@ -19,7 +19,7 @@ class GetCalendarResult {
 
 class GetCalendarUseCase
     extends UseCase<GetCalendarResult, ParamsUseCaseGetCalendar> {
-  final ApodInterface repository;
+  final CalendarInterface repository;
 
   GetCalendarUseCase({required this.repository});
 

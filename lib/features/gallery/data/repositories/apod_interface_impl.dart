@@ -20,14 +20,4 @@ class ApodInterfaceImpl implements ApodInterface {
       return Left(ServerFailure());
     }
   }
-  
-  @override
-  Future<Either<Failure, ApodEntity>> getCalendar({required DateTime date}) async {
-    try {
-      final response = await apodClient.getCalendar(date: date);
-      return Right(response);
-    } on Object {
-      return Left(ServerFailure());
-    }
-  }
 }

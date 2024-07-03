@@ -1,16 +1,20 @@
-part of 'apod_bloc.dart';
+part of 'calendar_bloc.dart';
 
-abstract class ApodEvent extends Equatable {
-  const ApodEvent();
+abstract class CalendarEvent extends Equatable {
+  const CalendarEvent();
 
   @override
   List<Object> get props => [];
 }
 
 // Get Event Action /// -----------------------------------/// -----------------------------------/// -----------------------------------
-class GetGalleryEvent extends ApodEvent {
-  const GetGalleryEvent();
+
+class GetCalendarEvent extends CalendarEvent {
+  final DateTime date;
+
+  const GetCalendarEvent({required this.date});
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [date];
 }
 /// -----------------------------------/// -----------------------------------/// -----------------------------------/// -----------------------------------

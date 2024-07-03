@@ -2,7 +2,7 @@ import 'package:apod/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/di/injection.dart';
-import '../viewmodel/apod_bloc.dart';
+import '../viewModel/calendar_bloc.dart';
 
 class DatePicker extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
-  final apodBloc = getIt<ApodViewModel>();
+  final calendarBloc = getIt<CalendarViewModel>();
   DateTime selectedDate = DateTime.now();
   late FixedExtentScrollController _dayController;
   late FixedExtentScrollController _monthController;
@@ -88,7 +88,13 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => apodBloc.add(GetCalendarEvent(date: selectedDate)),
+      onTap: () {
+        try {
+          calendarBloc.add(GetCalendarEvent(date: selectedDate));
+        } catch (e) {
+          print(e.toString());
+        }
+      },
       child: Container(
         height: 200,
         child: Row(

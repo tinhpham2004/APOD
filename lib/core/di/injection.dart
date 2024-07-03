@@ -3,6 +3,7 @@ import 'package:apod/features/gallery/presentation/view/apod_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/calendar/di/dependecy_injection.dart';
 import '../../features/gallery/presentation/view/gallery_screen.dart';
 import '../network/network_info.dart';
 import '../network/server_api_client.dart';
@@ -27,4 +28,5 @@ void setup() {
 Future<void> initFeaturesDependecies() async {
   getIt.pushNewScope();
   await initGallery();
+  await initCalendar();
 }
