@@ -81,19 +81,80 @@ class _DatePickerState extends State<DatePicker> {
     ];
 
     String month = months[data - 1];
-
     return month;
+  }
+
+  bool isValidDate(DateTime date) {
+    final DateTime startDate = DateTime(1995, 6, 16);
+    final DateTime endDate = DateTime.now();
+
+    if (!_isValidDateComponents(date.year, date.month, date.day)) {
+      return false;
+    }
+
+    if (date.isAfter(startDate) && date.isBefore(endDate)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool _isValidDateComponents(int year, int month, int day) {
+    if (month < 1 || month > 12) {
+      return false;
+    }
+
+    final List<int> daysInMonth = [
+      31,
+      (isLeapYear(year) ? 29 : 28),
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+    ];
+
+    if (day < 1 || day > daysInMonth[month - 1]) {
+      return false;
+    }
+
+    return true;
+  }
+
+  bool isLeapYear(int year) {
+    if (year % 4 != 0) {
+      return false;
+    } else if (year % 100 != 0) {
+      return true;
+    } else if (year % 400 != 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  void showInvalidDateSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text('Invalid date selected. Please choose a valid date.'),
+      duration: Duration(seconds: 3),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        try {
+        if (isValidDate(selectedDate))
           widget.calendarBloc.add(GetCalendarEvent(date: selectedDate));
-        } catch (e) {
-          print(e.toString());
-        }
+        else
+          showInvalidDateSnackbar(context);
       },
       child: Container(
         height: 400,
