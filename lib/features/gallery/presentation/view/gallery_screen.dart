@@ -1,11 +1,11 @@
 import 'package:apod/core/colors/colors.dart';
 import 'package:apod/core/enums/media_type.dart';
-import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
+import 'package:apod/features/apod/domain/entities/apod_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injection.dart';
-import '../viewmodel/apod_bloc.dart';
+import '../viewmodel/gallery_bloc.dart';
 
 class GalleryScreen extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class GalleryScreen extends StatefulWidget {
 class _GalleryScreenState extends State<GalleryScreen> {
   List<ApodEntity> apodEntity = [];
 
-  final apodBloc = getIt<ApodViewModel>();
+  final galleryBloc = getIt<GalleryViewModel>();
 
   String _formatDate(String date) {
     List<String> parts = date.split("-");
@@ -69,26 +69,25 @@ class _GalleryScreenState extends State<GalleryScreen> {
             ),
           ],
         ),
-        body: BlocProvider<ApodViewModel>(
+        body: BlocProvider<GalleryViewModel>(
           create: (context) {
-            apodBloc.add(GetGalleryEvent());
-            return apodBloc;
+            galleryBloc.add(GetGalleryEvent());
+            return galleryBloc;
           },
-          child: BlocConsumer<ApodViewModel, ApodState>(
+          child: BlocConsumer<GalleryViewModel, GalleryState>(
             listener: (context, state) {
-              if (state is SuccessGetApodState) {
+              if (state is SuccessGetGalleryState) {
                 setState(() {
                   apodEntity = state.apodEntities;
                 });
-              }
-              if (state is FailedGetApodState) {
+              } else if (state is FailedGetApodState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Erorr')),
                 );
               }
             },
             builder: (context, state) {
-              if (state is LoadingGetApodState) {
+              if (state is LoadingGetGalleryState) {
                 return Center(child: CircularProgressIndicator());
               } else if (state is GetGalleryState) {
                 return Padding(

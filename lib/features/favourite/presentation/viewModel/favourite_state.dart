@@ -49,22 +49,4 @@ class GetFavouriteState extends FavouriteState {
   }
 }
 
-class IsFavouriteState extends FavouriteState {
-  final bool isFavourite;
-
-  const IsFavouriteState({
-    required this.isFavourite,
-  });
-
-  @override
-  List<Object?> get props => [isFavourite];
-
-  @override
-  String toString() {
-    return '''
-      FavouriteState State: ${isFavourite.toString()}
-      ''';
-  }
-}
-
 /// -----------------------------------/// -----------------------------------/// -----------------------------------/// -----------------------------------

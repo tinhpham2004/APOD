@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import '../../../gallery/domain/entities/apod_entity.dart';
+import '../../../apod/domain/entities/apod_entity.dart';
 import '../../domain/usecases/get_calendar.dart';
 import 'package:equatable/equatable.dart';
 

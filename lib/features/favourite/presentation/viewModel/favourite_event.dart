@@ -15,28 +15,4 @@ class GetFavouriteEvent extends FavouriteEvent {
   @override
   List<Object> get props => [];
 }
-
-class AddFavouriteEvent extends FavouriteEvent {
-  final ApodEntity apodEntity;
-  const AddFavouriteEvent({required this.apodEntity});
-
-  @override
-  List<Object> get props => [apodEntity];
-}
-
-class RemoveFavouriteEvent extends FavouriteEvent {
-  final ApodEntity apodEntity;
-  const RemoveFavouriteEvent({required this.apodEntity});
-
-  @override
-  List<Object> get props => [apodEntity];
-}
-
-class IsFavouriteEvent extends FavouriteEvent {
-  final ApodEntity apodEntity;
-  const IsFavouriteEvent({required this.apodEntity});
-
-  @override
-  List<Object> get props => [apodEntity];
-}
 /// -----------------------------------/// -----------------------------------/// -----------------------------------/// -----------------------------------

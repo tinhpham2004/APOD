@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../entities/apod_entity.dart';
+import '../../../apod/domain/entities/apod_entity.dart';
 import '../interfaces/apod_interface.dart';
 
 class ParamsUseCaseGetGallery {
@@ -18,7 +18,7 @@ class GetGalleryResult {
 
 class GetGalleryUseCase
     extends UseCase<GetGalleryResult, ParamsUseCaseGetGallery> {
-  final ApodInterface repository;
+  final GalleryInterface repository;
 
   GetGalleryUseCase({required this.repository});
 

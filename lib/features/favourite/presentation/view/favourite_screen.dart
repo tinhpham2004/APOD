@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/colors/colors.dart';
 import '../../../../core/di/injection.dart';
 import '../../../../core/enums/media_type.dart';
-import '../../../gallery/domain/entities/apod_entity.dart';
+import '../../../apod/domain/entities/apod_entity.dart';
 import '../viewModel/favourite_bloc.dart';
 
 class FavouriteScreen extends StatefulWidget {

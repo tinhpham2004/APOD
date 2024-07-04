@@ -2,7 +2,7 @@ import 'package:apod/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/injection.dart';
-import '../../../gallery/domain/entities/apod_entity.dart';
+import '../../../apod/domain/entities/apod_entity.dart';
 import '../widgets/date_picker.dart';
 import '../viewModel/calendar_bloc.dart';
 
@@ -30,7 +30,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
           leading: GestureDetector(
-            onTap: () {},
+            onTap: () => Navigator.of(context).pushNamed('/favourite'),
             child: Icon(
               Icons.star_outline_outlined,
               color: AppColors.white,

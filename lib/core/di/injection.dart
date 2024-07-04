@@ -1,8 +1,9 @@
 import 'package:apod/features/gallery/di/dependecy_injection.dart';
-import 'package:apod/features/gallery/presentation/view/apod_screen.dart';
+import 'package:apod/features/apod/presentation/view/apod_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/apod/di/dependecy_injection.dart';
 import '../../features/calendar/di/dependecy_injection.dart';
 import '../../features/favourite/di/dependecy_injection.dart';
 import '../../features/gallery/presentation/view/gallery_screen.dart';
@@ -31,4 +32,5 @@ Future<void> initFeaturesDependecies() async {
   await initGallery();
   await initCalendar();
   await initFavourite();
+  await initApod();
 }

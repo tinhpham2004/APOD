@@ -1,24 +1,24 @@
-part of 'apod_bloc.dart';
+part of 'gallery_bloc.dart';
 
-abstract class ApodState extends Equatable {
-  const ApodState();
+abstract class GalleryState extends Equatable {
+  const GalleryState();
 }
 
-// Get ApodState State for ApodState feature /// -----------------------------------/// -----------------------------------/// -----------------------------------
-class InitGetApodState extends ApodState {
+// Get GalleryState State for GalleryState feature /// -----------------------------------/// -----------------------------------/// -----------------------------------
+class InitGetGalleryState extends GalleryState {
   @override
   List<Object?> get props => [];
 }
 
-class LoadingGetApodState extends ApodState {
+class LoadingGetGalleryState extends GalleryState {
   @override
   List<Object?> get props => [];
 }
 
-class SuccessGetApodState extends ApodState {
+class SuccessGetGalleryState extends GalleryState {
   final List<ApodEntity> apodEntities;
 
-  const SuccessGetApodState({
+  const SuccessGetGalleryState({
     required this.apodEntities,
   });
 
@@ -26,12 +26,12 @@ class SuccessGetApodState extends ApodState {
   List<Object?> get props => [apodEntities];
 }
 
-class FailedGetApodState extends ApodState {
+class FailedGetApodState extends GalleryState {
   @override
   List<Object?> get props => [];
 }
 
-class GetGalleryState extends ApodState {
+class GetGalleryState extends GalleryState {
   final List<ApodEntity> apodEntities;
 
   const GetGalleryState({

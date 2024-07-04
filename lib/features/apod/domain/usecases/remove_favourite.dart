@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../../gallery/domain/entities/apod_entity.dart';
-import '../interfaces/favourite_interface.dart';
+import '../entities/apod_entity.dart';
+import '../interfaces/apod_interface.dart';
 
 class ParamsUseCaseRemoveFavourite {
   final ApodEntity apodEntity;
@@ -18,7 +18,7 @@ class RemoveFavouriteResult {
 
 class RemoveFavouriteUseCase
     extends UseCase<RemoveFavouriteResult, ParamsUseCaseRemoveFavourite> {
-  final FavouriteInterface repository;
+  final ApodInterface repository;
 
   RemoveFavouriteUseCase({required this.repository});
 

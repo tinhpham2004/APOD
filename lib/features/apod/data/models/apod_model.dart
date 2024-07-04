@@ -1,4 +1,4 @@
-import 'package:apod/features/gallery/domain/entities/apod_entity.dart';
+import 'package:apod/features/apod/domain/entities/apod_entity.dart';
 
 class ApodModel extends ApodEntity {
   ApodModel({

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/network/failure.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../../../gallery/domain/entities/apod_entity.dart';
+import '../../../apod/domain/entities/apod_entity.dart';
 import '../interfaces/favourite_interface.dart';
 
 class ParamsUseCaseGetFavourite {

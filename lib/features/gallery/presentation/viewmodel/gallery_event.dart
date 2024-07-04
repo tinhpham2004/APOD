@@ -1,14 +1,14 @@
-part of 'apod_bloc.dart';
+part of 'gallery_bloc.dart';
 
-abstract class ApodEvent extends Equatable {
-  const ApodEvent();
+abstract class GalleryEvent extends Equatable {
+  const GalleryEvent();
 
   @override
   List<Object> get props => [];
 }
 
 // Get Event Action /// -----------------------------------/// -----------------------------------/// -----------------------------------
-class GetGalleryEvent extends ApodEvent {
+class GetGalleryEvent extends GalleryEvent {
   const GetGalleryEvent();
   @override
   List<Object> get props => [];
