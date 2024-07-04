@@ -9,7 +9,8 @@ class ApodClientImpl implements ApodClient {
   static const String favoriteKey = 'favorite';
 
   @override
-  Future<List<ApodEntity>> addFavourite({required ApodEntity apodEntity}) async {
+  Future<List<ApodEntity>> addFavourite(
+      {required ApodEntity apodEntity}) async {
     final prefs = await SharedPreferences.getInstance();
     List<String> favorites = prefs.getStringList(favoriteKey) ?? [];
 
@@ -21,7 +22,6 @@ class ApodClientImpl implements ApodClient {
         .map((item) => ApodEntity.fromJson(jsonDecode(item)))
         .toList();
   }
-
 
   @override
   Future<List<ApodEntity>> removeFavourite(
@@ -45,9 +45,15 @@ class ApodClientImpl implements ApodClient {
     final prefs = await SharedPreferences.getInstance();
     List<String> favorites = prefs.getStringList(favoriteKey) ?? [];
 
-    return favorites
+    bool result = false;
+
+    favorites
         .map((item) => ApodEntity.fromJson(jsonDecode(item)))
         .toList()
-        .contains(apodEntity);
+        .forEach((element) {
+      if (element.date == apodEntity.date) result = true;
+    });
+
+    return result;
   }
 }

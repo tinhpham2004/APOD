@@ -78,7 +78,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
             listener: (context, state) {
               if (state is SuccessGetGalleryState) {
                 setState(() {
-                  apodEntity = state.apodEntities;
+                  apodEntity = state.apodEntities.reversed.toList();
                 });
               } else if (state is FailedGetApodState) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -93,11 +93,11 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 return Padding(
                   padding: EdgeInsets.only(left: 8.0, right: 8.0, top: 25.0),
                   child: ListView.builder(
-                    reverse: true,
-                    shrinkWrap: true,
-                    itemCount: state.apodEntities.length,
+                    reverse: false,
+                    shrinkWrap: false,
+                    itemCount: apodEntity.length,
                     itemBuilder: (context, index) {
-                      final apod = state.apodEntities[index];
+                      final apod = apodEntity[index];
                       return Padding(
                         padding: EdgeInsets.only(top: 16.0),
                         child: GestureDetector(
