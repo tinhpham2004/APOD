@@ -149,7 +149,7 @@ flutter run
 
 > Flutter and NASA APIs are technologies that allow me to
 realize the solution by creating a high-performance mobile application. With
-these technologies, I am extremely confident in developing our ideas:
+these technologies, I am extremely confident in developing my ideas:
 - ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 - ![NASA](https://img.shields.io/badge/nasa-%23039BE5.svg?style=for-the-badge&logo=nasa)
 
